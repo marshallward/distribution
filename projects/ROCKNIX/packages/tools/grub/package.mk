@@ -28,7 +28,15 @@ pre_configure_host() {
 
   mkdir -p .${HOST_NAME}
     cd .${HOST_NAME}
+
+  # Works?
+  export CFLAGS="${CFLAGS} -Wno-unterminated-string-initialization"
 }
+
+
+# Works but aggressive
+#PKG_CONFIGURE_OPTS_HOST="${PKG_CONFIGURE_OPTS_HOST} --disable-errors"
+
 
 pre_configure_target() {
   PKG_CONFIGURE_OPTS_TARGET="--target=arm64-pc-linux \

@@ -16,6 +16,10 @@ PKG_CONFIGURE_OPTS_TARGET="--with-curses \
                            --without-bash-malloc \
                            --with-installed-readline"
 
+pre_configure_host() {
+  export CPPFLAGS="${CPPFLAGS} -include stdlib.h -Dxmalloc=xmalloc"
+}
+
 post_install() {
   ln -sf bash ${INSTALL}/usr/bin/sh
   mkdir -p ${INSTALL}/etc

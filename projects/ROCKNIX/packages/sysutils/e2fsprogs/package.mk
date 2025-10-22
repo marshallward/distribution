@@ -17,6 +17,13 @@ if [ "$HFSTOOLS" = "yes" ]; then
   PKG_DEPENDS_TARGET="${PKG_DEPENDS_TARGET} diskdev_cmds"
 fi
 
+
+# Will this work?
+# Build e2fsprogs as C11 to avoid C23 'bool' keyword breakage
+PKG_CFLAGS_HOST="$PKG_CFLAGS_HOST -std=gnu11"
+PKG_CFLAGS_TARGET="$PKG_CFLAGS_TARGET -std=gnu11"
+
+
 PKG_CONFIGURE_OPTS_HOST="--prefix=${TOOLCHAIN}/ \
                          --bindir=${TOOLCHAIN}/bin \
                          --with-udev-rules-dir=no \
@@ -70,6 +77,11 @@ pre_configure() {
                            --with-gnu-ld"
 
   PKG_CONFIGURE_OPTS_TARGET="${PKG_CONFIGURE_OPTS_INIT} --enable-shared --disable-static"
+}
+
+pre_configure_host() {
+  echo ">>> using e2fsprogs at ${PKG_DIR}, ver ${PKG_VERSION} (HOST)"
+  export CFLAGS="$CFLAGS -std=gnu11"
 }
 
 post_makeinstall_target() {

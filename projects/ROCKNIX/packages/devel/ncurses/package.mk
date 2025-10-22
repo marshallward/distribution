@@ -62,7 +62,11 @@ PKG_CONFIGURE_OPTS_TARGET="
                            --enable-lib-suffixes \
                            --disable-assertions"
 
-PKG_CONFIGURE_OPTS_HOST="--enable-termcap \
+PKG_CONFIGURE_OPTS_HOST="
+                         --without-ada \
+                         --without-cxx \
+                         --without-cxx-binding \
+                         --enable-termcap \
                          --with-termlib \
                          --without-shared \
                          --enable-pc-files \
