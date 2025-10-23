@@ -35,16 +35,17 @@ pre_configure_host() {
     --disable-gcrypt \
     --disable-gnutls \
     --disable-system \
-    --disable-user \
     --disable-vnc \
     --disable-werror \
     --disable-xkbcommon \
-    --disable-zstd"
+    --disable-zstd \
+    --target-list=${TARGET_ARCH}-linux-user";
 
   export DONT_BUILD_LEGACY_PYC=1
 }
 
 makeinstall_host() {
   mkdir -p ${TOOLCHAIN}/bin
-    cp ${PKG_BUILD}/.${HOST_NAME}/qemu-img ${TOOLCHAIN}/bin
+  cp ${PKG_BUILD}/.${HOST_NAME}/qemu-img ${TOOLCHAIN}/bin
+  cp ${PKG_BUILD}/.${HOST_NAME}/qemu-${TARGET_ARCH} ${TOOLCHAIN}/bin
 }
