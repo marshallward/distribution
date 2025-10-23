@@ -17,7 +17,12 @@ PKG_CONFIGURE_OPTS_TARGET="--with-curses \
                            --with-installed-readline"
 
 pre_configure_host() {
-  export CPPFLAGS="${CPPFLAGS} -include stdlib.h -Dxmalloc=xmalloc"
+    export CFLAGS="${CFLAGS} -std=gnu89"
+}
+
+# mkbuiltins.c seems less strict about function argument count.
+pre_configure_target() {
+    export CFLAGS_FOR_BUILD="${CFLAGS_FOR_BUILD} -std=gnu89"
 }
 
 post_install() {
