@@ -86,6 +86,9 @@ pre_configure_target() {
   cd ${PKG_BUILD}
     rm -rf .${TARGET_NAME}
 
+# It needs perl's yapp!
+  PATH="${PATH}:/usr/bin/vendor_perl"
+
 # work around link issues
   export LDFLAGS="${LDFLAGS} -lreadline -lncursesw"
 

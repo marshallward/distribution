@@ -26,3 +26,13 @@ PKG_DEPENDS_HOST="SDL:host"
 PKG_LONGDESC="This is a small sample cross-platform networking library, with a sample chat client and server application."
 
 PKG_USE_CMAKE="no"
+
+pre_configure_host() {
+  export CONFIG_SHELL=/bin/bash
+  export SHELL=/bin/bash
+}
+
+pre_configure_target() {
+  export CONFIG_SHELL=/bin/bash
+  export SHELL=/bin/bash
+}

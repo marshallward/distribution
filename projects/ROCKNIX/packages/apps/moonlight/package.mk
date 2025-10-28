@@ -9,6 +9,9 @@ PKG_LONGDESC="Moonlight is an open source implementation of NVIDIA's GameStream,
 GET_HANDLER_SUPPORT="git"
 PKG_PATCH_DIRS+="${DEVICE}"
 
+# Temp
+PATH="${PATH}:/usr/bin/core_perl"
+
 if [ "${TARGET_ARCH}" = "null" ]
 then
   PKG_SITE+="qt"

@@ -29,7 +29,9 @@ configure_package() {
 }
 
 pre_configure_target() {
-  PKG_MESON_OPTS_TARGET="-Ddwrite=disabled \
+                         #-Dstrip=false
+  PKG_MESON_OPTS_TARGET="\
+                         -Ddwrite=disabled \
                          -Dfontconfig=enabled \
                          -Dfreetype=enabled \
                          -Dpng=enabled \

@@ -15,6 +15,9 @@ PKG_STAMP="${KERNEL_TARGET} ${KERNEL_MAKE_EXTRACMD}"
 
 PKG_PATCH_DIRS="${LINUX} mainline ${DEVICE} default"
 
+# Testing
+PKG_CONFIG="pkg-config"
+
 [[ "${DEVICE}" == RK* ]] && PKG_PATCH_DIRS+=" mainline-rockchip"
 
 case ${DEVICE} in
@@ -293,8 +296,7 @@ make_target() {
           ;;
       esac
 
-      [ "${DEVICE}" != "RK3588" && "${DEVICE}" != "SDM845" ] && export BUILD_BPF_SKEL=0
-
+      [ "${DEVICE}" != "RK3588" ] && [ "${DEVICE}" != "SDM845" ] && export BUILD_BPF_SKEL=0
 
       WERROR=0 \
       NO_LIBPERL=1 \

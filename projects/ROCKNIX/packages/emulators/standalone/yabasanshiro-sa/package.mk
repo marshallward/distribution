@@ -56,12 +56,12 @@ pre_configure_target() {
     aarch64)
       PKG_CMAKE_OPTS_TARGET+=" -DYAB_WANT_ARM7=ON \
                                -DYAB_WANT_DYNAREC_DEVMIYAX=ON \
-                               -DCMAKE_TOOLCHAIN_FILE=${PKG_BUILD}/yabause/src/retro_arena/n2.cmake \
+                               -DCMAKE_TOOLCHAIN_FILE=${TOOLCHAIN}/etc/cmake-aarch64-rocknix-linux-gnueabi.conf \
                                -DYAB_PORTS=retro_arena"
     ;;
   esac
 
-  PKG_CMAKE_OPTS_TARGET+=" -DCMAKE_SYSTEM_PROCESSOR=x86_64"
+  #PKG_CMAKE_OPTS_TARGET+=" -DCMAKE_SYSTEM_PROCESSOR=x86_64"
 
   PKG_CMAKE_OPTS_TARGET+=" -DOPENGL_INCLUDE_DIR=${SYSROOT_PREFIX}/usr/include \
                            -DOPENGL_opengl_LIBRARY=${SYSROOT_PREFIX}/usr/lib \
@@ -69,7 +69,12 @@ pre_configure_target() {
                            -DLIBPNG_LIB_DIR=${SYSROOT_PREFIX}/usr/lib \
                            -Dpng_STATIC_LIBRARIES=${SYSROOT_PREFIX}/usr/lib/libpng16.so \
                            -DCMAKE_BUILD_TYPE=Release \
-						   -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON"
+                           -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON"
+
+  # Trying to fix some nanovg linking issues
+  # These would have been read from n2.conf, but I couldn't use it?
+  export CFLAGS="${CFLAGS} -D_POSIX_C_SOURCE=199309L -D__N2__ -D__RETORO_ARENA__"
+  export CXXFLAGS="${CXXFLAGS} -D_POSIX_C_SOURCE=199309L -D__N2__ -D__RETORO_ARENA__"
 }
 
 makeinstall_target() {

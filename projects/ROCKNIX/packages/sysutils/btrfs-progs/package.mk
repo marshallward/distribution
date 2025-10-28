@@ -19,6 +19,7 @@ PKG_CONFIGURE_OPTS_TARGET="--disable-backtrace \
                            --disable-python"
 
 pre_configure_target() {
+  #cd ${PKG_BUILD} && ./autogen.sh
   ./autogen.sh
 }
 

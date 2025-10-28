@@ -24,4 +24,7 @@ pre_configure_target() {
 
   PKG_CONFIG+=" --define-variable=pythondir=${PYTHON_TOOLCHAIN_PATH}"
   PKG_CONFIG+=" --define-variable=xcbincludedir=${SYSROOT_PREFIX}/usr/share/xcb"
+
+  ## Correct?
+  #export LDFLAGS="${LDFLAGS//-Wl,--as-needed/}"
 }
