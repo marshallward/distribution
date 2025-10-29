@@ -26,3 +26,6 @@ PKG_DEPENDS_HOST="SDL:host"
 PKG_LONGDESC="This is a small sample cross-platform networking library, with a sample chat client and server application."
 
 PKG_USE_CMAKE="no"
+
+# SDL_net uses libtool, which appears to require bash (or at least +=)
+CONFIG_SHELL="/bin/bash"
